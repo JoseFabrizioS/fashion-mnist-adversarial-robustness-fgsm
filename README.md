@@ -69,6 +69,8 @@ La **accuracy robusta** es el porcentaje de imágenes perturbadas que permanecen
 ```text
 .
 ├── assets/                         # Visuales utilizados en la documentación
+├── data/
+│   └── README.md                   # Origen, carga y visualización del dataset
 ├── docs/
 │   ├── informe-final.docx          # Informe académico completo
 │   ├── presentacion-final.pptx     # Presentación para la exposición
@@ -83,6 +85,38 @@ La **accuracy robusta** es el porcentaje de imágenes perturbadas que permanecen
 ├── requirements.txt
 └── README.md
 ```
+
+## Origen y carga del dataset
+
+El proyecto utiliza **Fashion-MNIST**, publicado por [Zalando Research](https://github.com/zalandoresearch/fashion-mnist). El conjunto contiene 70,000 imágenes de prendas en escala de grises y tamaño `28 x 28`: 60,000 se destinan al entrenamiento y 10,000 a la prueba. Cada imagen pertenece a una de diez categorías.
+
+Zalando es la fuente original del dataset; en esta implementación, el [cargador oficial de TensorFlow/Keras](https://www.tensorflow.org/api_docs/python/tf/keras/datasets/fashion_mnist/load_data) obtiene automáticamente sus cuatro archivos comprimidos desde el alojamiento `tf-keras-datasets` de TensorFlow. No es necesario descargarlos ni subirlos manualmente al repositorio:
+
+```python
+(x_train, y_train), (x_test, y_test) = (
+    tf.keras.datasets.fashion_mnist.load_data()
+)
+```
+
+`load_data()` devuelve directamente las imágenes y sus etiquetas, ya separadas en entrenamiento y prueba. Las dimensiones esperadas son:
+
+```text
+x_train: (60000, 28, 28)   y_train: (60000,)
+x_test:  (10000, 28, 28)   y_test:  (10000,)
+```
+
+Después de la carga, el código normaliza los píxeles de `0-255` al rango `0-1` y agrega el canal necesario para la CNN:
+
+```python
+x_train = x_train.astype("float32") / 255.0
+x_test = x_test.astype("float32") / 255.0
+x_train = x_train[..., tf.newaxis]
+x_test = x_test[..., tf.newaxis]
+```
+
+En Google Colab, la carpeta visible `sample_data` contiene archivos de demostración propios de Colab, como `mnist_train_small.csv`, y **no corresponde a Fashion-MNIST**. Keras guarda el dataset descargado en su caché interna, normalmente en `/root/.keras/datasets/fashion-mnist/`. En una computadora local se almacena bajo `~/.keras/datasets/fashion-mnist/`. Si los archivos ya están en la caché, las siguientes ejecuciones los reutilizan.
+
+El dataset no se versiona en este repositorio porque su descarga está automatizada. Esto evita duplicar los archivos originales y permite reproducir el experimento usando la fuente pública. La carpeta [`data/`](data/README.md) documenta con mayor detalle la procedencia, las categorías y la forma de visualizar una muestra.
 
 ## Ejecución local
 
@@ -123,7 +157,7 @@ Para una prueba corta:
 python src/fashion_mnist_fgsm.py --epochs 1 --output-dir results/quick-run
 ```
 
-TensorFlow descarga Fashion-MNIST automáticamente; por ese motivo el dataset no se almacena en este repositorio.
+TensorFlow descarga Fashion-MNIST automáticamente siguiendo el procedimiento descrito en la sección anterior.
 
 ## Parámetros principales
 
