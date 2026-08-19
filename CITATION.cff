@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "Si utiliza este proyecto, cite el repositorio y a sus autores."
+title: "Clasificación de Fashion-MNIST y robustez adversaria con FGSM"
+type: software
+version: 1.0.0
+date-released: 2026-08-18
+repository-code: "https://github.com/JoseFabrizioS/fashion-mnist-adversarial-robustness-fgsm"
+authors:
+  - given-names: Alexander
+    family-names: "Salazar Martínez"
+  - given-names: Victoria
+    family-names: "Cerquera Gorritti"
+  - given-names: José
+    family-names: "Santacruz Mujica"
+  - given-names: Marco
+    family-names: "Lopez Ayme"
+  - given-names: Valentino
+    family-names: "Oriundo Flores"
