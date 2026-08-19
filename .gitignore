@@ -22,7 +22,8 @@ checkpoints/
 logs/
 
 # Datos descargados y ejecuciones locales
-data/
+data/*
+!data/README.md
 results/generated/
 results/quick-run/
 

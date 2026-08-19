@@ -69,6 +69,8 @@ La **accuracy robusta** es el porcentaje de imágenes perturbadas que permanecen
 ```text
 .
 ├── assets/                         # Visuales utilizados en la documentación
+├── data/
+│   └── README.md                   # Origen, carga y visualización del dataset
 ├── docs/
 │   ├── informe-final.docx          # Informe académico completo
 │   ├── presentacion-final.pptx     # Presentación para la exposición
@@ -112,9 +114,9 @@ x_train = x_train[..., tf.newaxis]
 x_test = x_test[..., tf.newaxis]
 ```
 
-En Google Colab, la carpeta visible `sample_data` contiene archivos de demostración propios de Colab, como `mnist_train_small.csv`, y **no corresponde a Fashion-MNIST**. Keras guarda el dataset descargado en su caché interna, normalmente en `/root/.keras/datasets/`. En una computadora local se almacena bajo `~/.keras/datasets/`. Si los archivos ya están en la caché, las siguientes ejecuciones los reutilizan.
+En Google Colab, la carpeta visible `sample_data` contiene archivos de demostración propios de Colab, como `mnist_train_small.csv`, y **no corresponde a Fashion-MNIST**. Keras guarda el dataset descargado en su caché interna, normalmente en `/root/.keras/datasets/fashion-mnist/`. En una computadora local se almacena bajo `~/.keras/datasets/fashion-mnist/`. Si los archivos ya están en la caché, las siguientes ejecuciones los reutilizan.
 
-El dataset no se versiona en este repositorio porque su descarga está automatizada. Esto evita duplicar los archivos originales y permite reproducir el experimento usando la fuente pública.
+El dataset no se versiona en este repositorio porque su descarga está automatizada. Esto evita duplicar los archivos originales y permite reproducir el experimento usando la fuente pública. La carpeta [`data/`](data/README.md) documenta con mayor detalle la procedencia, las categorías y la forma de visualizar una muestra.
 
 ## Ejecución local
 
